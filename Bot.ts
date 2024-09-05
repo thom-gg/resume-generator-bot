@@ -66,59 +66,59 @@ async function resume_generation(conversation: MyConversation, ctx: MyContext) {
     let message = "";
     message += "📩 Generating resume 📩";
     message += "\n\n";
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     await ctx.reply("1️⃣ What's your full name ? (ex: John Doe)");
     const full_name = (await conversation.waitFor(":text")).msg.text;
 
     message += `📑 <u>Full name</u>: <b>${full_name}</b>`;
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     await ctx.reply("2️⃣ What is your location ? (ex: Paris, France)");
     const location = (await conversation.waitFor(":text")).msg.text;
 
 
     message += `\n📑 <u>Location</u>: <b>${location}</b>`;
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     await ctx.reply("3️⃣ What is your contact ? (mail / phone number)");
     const contact = (await conversation.waitFor(":text")).msg.text;
 
     message += `\n📑 <u>Contact</u>: <b>${contact}</b>`;
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     await ctx.reply("4️⃣ Link to LinkedIn profile\nSend 'empty' to ignore");
     let linkedin = (await conversation.waitFor(":text")).msg.text;
     if (linkedin == "empty") { linkedin = "" };
 
     message += `\n📑 <u>LinkedIn</u>: <b>${linkedin}</b>`;
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     await ctx.reply("5️⃣ Link to GitHub profile\nSend 'empty' to ignore");
     let github = (await conversation.waitFor(":text")).msg.text;
     if (github == "empty") { github = "" };
 
     message += `\n📑 <u>GitHub</u>: <b>${github}</b>`;
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     await ctx.reply("6️⃣ Languages you use ? (ex: 'Java, Kotlin, Python')");
     const languages = (await conversation.waitFor(":text")).msg.text;
 
     message += `\n📑 <u>Languages</u>: <b>${languages}</b>`;
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     await ctx.reply("7️⃣ Technologies you use ? (ex: 'ReactJS, Docker, Unix, TensorFlow')");
     const technologies = (await conversation.waitFor(":text")).msg.text;
 
     message += `\n📑 <u>Technologies</u>: <b>${technologies}</b>`;
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     await ctx.reply("8️⃣ Other skills ? (ex: 'Data Structures, Linear Algebra')");
     const other = (await conversation.waitFor(":text")).msg.text;
 
     message += `\n📑 <u>Other</u>: <b>${other}</b>`;
     message += `\n\n<b><u>👷 Work experience 👷</u></b>`;
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     let work_experience: WorkExperienceType[] = [];
     let keep_adding: boolean = await ask_yes_no(conversation, ctx, "👷 Do you want to add another work experience ? (yes/no)");
@@ -126,7 +126,7 @@ async function resume_generation(conversation: MyConversation, ctx: MyContext) {
     while (keep_adding) {
         message += `\n\n🔹`;
         // Prompt all the items of work_experience
-        await ctx.reply(message, { parse_mode: "HTML" });
+        await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
         // title company period team_name location bullets
         await ctx.reply("🤵 Job title ? (ex: Software Engineer Intern)");
@@ -169,20 +169,20 @@ async function resume_generation(conversation: MyConversation, ctx: MyContext) {
         // add items to the list
         work_experience.push({ title, company, period, team_name, location, bullets })
 
-        await ctx.reply(message, { parse_mode: "HTML" });
+        await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
         // Prompt to know if we keep going
         keep_adding = await ask_yes_no(conversation, ctx, "Do you want to another work experience ? (yes/no)");
     }
 
     message += `\n\n<b><u>🧑‍🎓 Education 🧑‍🎓</u></b>`
-    await ctx.reply(message, { parse_mode: "HTML" });
+    await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
     let education: EducationType[] = [];
 
     keep_adding = await ask_yes_no(conversation, ctx, "🧑‍🏫 Do you want to add another education item ? (yes/no)");
     while (keep_adding) {
         message += `\n\n🔸`;
-        await ctx.reply(message, { parse_mode: "HTML" });
+        await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
 
         await ctx.reply("🧑‍🎓 Degree title ? (ex: Bachelor in Computer Science)");
@@ -199,7 +199,7 @@ async function resume_generation(conversation: MyConversation, ctx: MyContext) {
         const period = (await conversation.waitFor(":text")).msg.text;
 
         message += ` (${period})`;
-        await ctx.reply(message, { parse_mode: "HTML" });
+        await ctx.reply(message, { parse_mode: "HTML", link_preview_options: { is_disabled: true } });
 
         education.push({ degree_title, school_name, period });
 
@@ -252,9 +252,7 @@ async function resume_generation(conversation: MyConversation, ctx: MyContext) {
 
     fs.rmSync(output_path);
 
-    await ctx.reply(`✅ <b>Done ! </b> ✅\n\n
-                    Here is your .docx file that you can modify if needed, and convert to PDF.\n\n
-                    <i>We do not store your data, your file has already been removed from our server.</i>`,
+    await ctx.reply(`✅ <b>Done ! </b> ✅\n\nHere is your .docx file that you can modify if needed, and convert to PDF.\n\n<i>We do not store your data, your file has already been removed from our server.</i>`,
         { parse_mode: "HTML" });
 }
 bot.use(createConversation(resume_generation));
