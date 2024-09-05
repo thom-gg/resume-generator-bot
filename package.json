@@ -1,0 +1,23 @@
+{
+  "name": "telegram-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node ./Bot.ts",
+    "dev": "ts-node-dev ./Bot.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@grammyjs/conversations": "^1.2.0",
+    "@grammyjs/menu": "^1.2.2",
+    "docxtemplater": "^3.50.0",
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security",
+    "grammy": "^1.29.0",
+    "pizzip": "^3.1.7",
+    "ts-node": "^10.9.2"
+  }
+}
